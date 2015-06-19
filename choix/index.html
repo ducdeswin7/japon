@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>yakuza</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        .blue{
+            background: blue;
+            height: 100%;
+        }
+        .red{
+            background: red;
+            height: 100%;
+        }
+        #blue{
+            text-decoration: none;
+            color: #ffffff;
+            font: 23px OpenSans;
+            margin: 20px ;
+        }
+        p{
+            color: #ffffff;
+            font: 25px opensans;
+            text-align: center;
+        }
+        .center{
+            width: 51.71px;
+            margin: 0 auto;
+            }
+        .load{
+            background:black;
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            display: none;
+        }
+        .container{
+            height: 100%;
+        }
+        #videoLink{
+            display: block;
+            text-align: center;
+        }
+        .acceuil{
+            height: 100%;
+            background: red;
+            position: relative;
+            z-index: 1;
+        }
+        #intro{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        #myLink{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+
+        }
+        .truc{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background-color: aquamarine;
+            height: 100%;
+            width: 100%;
+        }
+        #skip{
+            position: absolute;
+            top: 20px;
+            z-index: 2;
+        }
+        #info{
+            height:100%;
+            width:100%;
+            background:black;
+            display:none;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        .accept{
+            height: 100%;
+            width: 100%;
+            background-color: rgba(250, 235, 215, 0.77);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="load"><img src="https://d13yacurqjgara.cloudfront.net/users/12755/screenshots/1037374/hex-loader2.gif" alt=""/></div>
+<div class="container">
+    <div class="blue">
+        <p>As tu plus de 18ans ?</p>
+        <div class="center">
+            <a id="oui" href="">oui</a>
+            <a id="non" href="http://www.nyan.cat">non</a>
+        </div>
+    </div>
+</div>
+
+<script src="jquery.js"></script>
+<script>
+    $(function(){
+        var $oui = $('#oui');
+            $blue = $('.blue');
+        $oui.on('click',function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url      : "oui.php",
+                dataType:'html',
+                method:'post',
+                //avant que le requete soit exécuté
+                beforeSend: function(){
+                    $('.load').fadeIn(500);
+
+                },
+                cache    : false,
+                error    : function(request, error) { // Info Debuggage si erreur
+                    console.log(arguments);
+                    alert("Erreur : responseText: "+request.responseText);
+                },
+                //au moment ou la requete est exécuté
+                success  : function(html) {
+                    afficher(html);
+                    $('.container').remove();
+                }
+            });
+        });
+        //fonction qui retire et affiche le contenu
+        function afficher(data){
+            $('<div/>').addClass('red');
+            $('.load').fadeOut(500);
+            var $phrase = $(data).filter('div').appendTo('body');
+            console.log($phrase);
+
+            $phrase.css({
+                display:'none'
+            })
+                    .fadeIn(1000);
+
+        }
+        var $videoLink =  $('#videoLink');
+        $videoLink.on('click',function(e){
+            e.preventDefault();
+            $('.truc').fadeOut(2000);
+            $('#myLink').show().play();
+        });
+
+    });
+</script>
+</body>
+</html>
