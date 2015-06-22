@@ -1,0 +1,374 @@
+@import "compass";
+@import "bootstrap";
+//@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+
+//VARIABLES
+$colorText1:#fff;
+$colorText2:#a02424;
+$colorTextFooter:#a6a6a6;
+
+//ANIMATION
+@-webkit-keyframes loading{
+  0%,100%   { opacity: 0; }
+  80%       { opacity: 1; }
+}
+//GENERAL
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  background: #000;
+  height: 100%;
+  color:$colorText1;
+
+}
+a{
+  text-decoration: none;
+}
+
+/** fullscreen**/
+
+//colors
+$white: #fff;
+$color_flush_mahogany_approx: #c0392b;
+
+//urls
+$url_0: url(../images/arrow3.png);
+
+//@extend-elements
+//original selectors
+//.part1, .part2
+%extend_1 {
+  width: 8px;
+  height: 15px;
+  background: $url_0 no-repeat;
+  background-size: 30px;
+  float: left;
+  transition: all .2s ease-out;
+}
+
+
+.btn {
+  width: 25px;
+  height: 25px;
+  background-color: rgba(84, 89, 92, 0);
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  box-shadow: 0 0 0 2px $white;
+  cursor: pointer;
+  transition: all .2s ease-out;
+  transform: rotate(-225deg);
+  &:active {
+    background-color: $color_flush_mahogany_approx;
+  }
+
+  .part1 {
+    @extend %extend_1;
+
+    transform: rotate(135deg);
+    position: relative;
+    top: 8px;
+    left: 9px;
+  }
+  .part2 {
+    @extend %extend_1;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 3px;
+    left: 0px;
+  }
+  &.fullscreen {
+    transform: scale(1.1);
+    transition: all .2s ease-out;
+    transform: rotate(-225deg);
+    .part1 {
+
+      transform: rotate(-45deg);
+      position: relative;
+      top: 2.5px;
+      left: -1px;
+    }
+    .part2 {
+      transform: rotate(135deg);
+      position: relative;
+      top: 8px;
+      left: 10px;
+    }
+  }
+
+}
+
+
+.content{
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+section{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+//UNDER 18 Yo
+.choix{
+  overflow: auto;
+  background: #000;
+  position: relative;
+  .container-choix{
+    	width: percentage(392/1200);
+        margin: 0 auto;
+  }
+	#logo{
+	  	width: 140px;
+        margin: 25% auto 0px;
+	}
+  p{
+    margin-top: 90px;
+    font:400 31px PT Sans;
+    letter-spacing:3px ;
+	text-align: center;
+	text-transform: uppercase;
+  }
+
+  a{
+    color: $colorText1;
+    text-transform: uppercase;
+	font:400 20px PT Sans;
+      &:hover{
+				
+      }
+  }
+	#non{
+      color: $colorText2;
+	}
+}
+
+//LOADING
+.load{
+  @extend .choix;
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+    img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform( translateX(-50%)translateY(-50%));
+      @include animation( loading 2s infinite);
+    }
+}
+//HEADER
+header{
+    color: $colorTextFooter;
+    z-index: 1;
+	position: fixed;
+    right: 25px;
+    top: 20px;
+	#mute{
+    position: fixed;
+    right: 90px;
+    top: 20px;
+    cursor: pointer;
+    padding: 8px;
+    width: 33px;
+    height: 33px; 
+	}
+
+}
+//FOOTER
+footer{
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  color: $colorTextFooter;
+  .mention{
+    text-transform: uppercase;
+    font:400 11px PT Sans;
+    margin-left: 25px;
+    cursor: pointer;
+  }
+  #share{
+    float: right;
+    text-transform: uppercase;
+    font:400 11px PT Sans;
+    margin-right: 25px;
+    cursor: pointer;
+  }
+}
+//HOME
+.acceuil{
+    overflow: hidden;
+	background: url('../images/bg-home.jpg')no-repeat;
+	background-size: cover;
+
+  figure{
+    width: 140px;
+    margin: 15% auto 0px;
+  }
+  .title{
+    font: 300 36px Prata;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    display: none;
+  }
+  #begin{
+    font:400 20px PT Sans;
+    text-transform: uppercase;
+    color:$colorText1;
+    display: block;
+    text-align: center;
+  }
+
+  i{
+    display: block;
+    color: $colorTextFooter;
+   }
+
+}
+//VIDEO
+
+.video{
+  display: none;
+
+  #vidintro{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 56.25vw;
+
+  }
+}
+
+//RULES
+
+.regles{
+  display: none;
+  background:url("../images/bc-rule.jpg") no-repeat;
+  background-size:cover;
+  .bg-titleRules{
+    position: relative;
+    float: left;
+    height: 100%;
+    width: percentage(430/1200);
+    background-color: black;
+    color: $colorText1;
+    h2{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform( translateX(-50%)translateY(-50%));
+
+    }
+  }
+  .blur{
+    position: relative;
+    width: 80px;
+    float: left;
+    height: 100%;
+    &:before{
+        content: "";
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        display: block;
+        width: 100%;
+        height: 100px;
+
+   }
+
+    ul{
+      list-style: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform( translateX(-50%)translateY(-50%));
+    }
+  }
+  .content-ajax{
+    position: relative;
+    float: left;
+    width: percentage(695/1200);
+    height: 100%;
+    #ajax{
+      text-align: center;
+      width: 100%;
+      font: 400 24px PT Sans;
+      text-transform: uppercase;
+      position: absolute;
+      top: 50%;
+      @include transform(translateY(-50%));
+    }
+  }
+
+  span{
+    cursor: pointer;
+  }
+}
+
+//RULES ACCEPTED
+
+#accepted-rule{
+  display: none;
+}
+
+//RULES DENIES
+
+#refused-rule{
+  display: none;
+}
+
+//FAMILLE
+
+#choixFamille{
+  @include make-row();
+  margin: 0;
+  .famille{
+    @include make-md-column(3);
+    @include make-lg-column(3);
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translateY(-50%) translateX(-50%) );
+    }
+    .titleFamille{
+      display: block;
+      text-align: center;
+      font:400 24px PT Sans;
+      text-transform: uppercase;
+    }
+  }
+}
+#choix-done{
+  display: none;
+}
+.title{
+  display: none;
+  h3{
+    font:300 120px Prata;
+    text-align: center;
+  }
+}
+
